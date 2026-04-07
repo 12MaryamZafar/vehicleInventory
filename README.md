@@ -132,7 +132,7 @@ cd dealer-vehicle-inventory
 ### 2. Configure Database
 Edit `src/main/resources/application.properties`:
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/inventory_db
+spring.datasource.url=jdbc:mysql://localhost:3306/vehicleinventory-db
 spring.datasource.username=your_user
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
