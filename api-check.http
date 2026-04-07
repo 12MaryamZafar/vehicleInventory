@@ -1,0 +1,7 @@
+### GET request to example server
+GET http://localhost:8080/dealers
+Headers:
+X-Tenant-Id: tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+
+###
