@@ -1,21 +1,19 @@
 package com.maryam.vehicleinventory.inventory.dto;
 
 import com.maryam.vehicleinventory.inventory.enums.VehicleStatus;
-import lombok.Builder;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
-@Builder
-public class VehicleResponse {
+public class VehicleUpdateRequest {
 
-    private UUID id;
-    private String tenantId;
-    private UUID dealerId;
-    private String dealerName;
+    // All fields optional for PATCH
     private String model;
+
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
     private BigDecimal price;
+
     private VehicleStatus status;
 }
