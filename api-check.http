@@ -1,7 +1,119 @@
-### GET request to example server
-GET http://localhost:8080/dealers
-Headers:
+
+### create a dealer
+POST http://localhost:8080/dealers
 X-Tenant-Id: tenant-abc
 Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type: application/json
 
-###
+{
+  "name": "AutoMax",
+  "email": "info@automax.com",
+  "subscriptionType": "PREMIUM"
+}
+
+### get all dealers
+GET http://localhost:8080/dealers?page=0&size=10&sort=name,asc
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+
+### count by admin
+GET http://localhost:8080/admin/dealers/countBySubscription
+Headers:
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+
+### create a vehicle
+POST http://localhost:8080/vehicles
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type:  application/json
+
+{
+  "dealerId": "7dbe91ee-0cfd-4c39-a5bb-3dd7dbd91f6d",
+  "model": "Toyota Corolla",
+  "price": 25000.00,
+  "status": "AVAILABLE"
+}
+
+### filter premium vehicles
+GET http://localhost:8080/vehicles?subscription=PREMIUM
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+
+### cross-tenant check
+GET http://localhost:8080/vehicles/1e98ecab-2b83-4879-94f7-336e0fe6cf2d
+Headers:
+X-Tenant-Id:   different-tenant
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+
+### update dealer name only
+PATCH http://localhost:8080/dealers/{id}
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type:  application/json
+
+{
+  "name": "AutoMax Updated"
+}
+
+### update subscription
+PATCH http://localhost:8080/dealers/{id}
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type:  application/json
+
+{
+  "subscriptionType": "BASIC"
+}
+
+### vehicle update
+PATCH http://localhost:8080/vehicles/{id}
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type:  application/json
+
+{
+  "status": "SOLD"
+}
+
+###update vehicle price
+PATCH http://localhost:8080/vehicles/{id}
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type:  application/json
+
+{
+  "price": 22000.00
+}
+
+### email conflict
+POST http://localhost:8080/dealers
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type:  application/json
+
+{
+  "name": "AutoMax",
+  "email": "info@automax.com",
+  "subscriptionType": "PREMIUM"
+}
+
+### validation check
+POST http://localhost:8080/dealers
+Headers:
+X-Tenant-Id:   tenant-abc
+Authorization: Basic dGVuYW50OnRlbmFudDEyMw==
+Content-Type:  application/json
+
+{
+  "name": "",
+  "email": "not-an-email",
+  "subscriptionType": "PREMIUM"
+}
